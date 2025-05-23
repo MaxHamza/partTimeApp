@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(fontFamily: 'Calibri'),
+          theme: ThemeData(fontFamily: 'Calibr'),
           home: Login(),
         );
       },
