@@ -10,11 +10,10 @@ import 'package:parttime/views/Settings/profile.dart';
 import 'package:parttime/widgets/screen_background.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
+   HomeView({super.key});
+  final homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(106, 255, 255, 255),
