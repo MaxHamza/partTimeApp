@@ -60,6 +60,9 @@ class Login extends StatelessWidget {
                             duration: Duration(seconds: 2),
                           ),
                         );
+                        if(userName.text==''&&password.text==''){
+                          Get.offAll(() => HomeView());
+                        }
                       } else if (state is LoginSuccess) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

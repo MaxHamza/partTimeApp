@@ -32,7 +32,7 @@ class SignupCubit extends Cubit<SignupState> {
       }
       else{
         String message;
-        message='Sign up failed. Status code: ${response.statusCode}';
+        message='Sign up failed';
         print('Sign up failed. Status code: ${response.statusCode}');
         print('Body: ${response.body}');
         emit(SignupFailure(message));

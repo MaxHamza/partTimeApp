@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
         print('Login successful. Token: $token');
         emit(LoginSuccess());
       } else {
-        message='Login failed. Status code: ${response.statusCode}';
+        message='Login failed';
         print('Login failed. Status code: ${response.statusCode}');
         print('Body: ${response.body}');
         emit(LoginFailure(message));
