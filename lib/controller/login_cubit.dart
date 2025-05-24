@@ -22,7 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
         }),
       );
      String message;
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200||response.statusCode==201) {
         final data = jsonDecode(response.body);
         final token = data['token']; // مثال
         print('Login successful. Token: $token');

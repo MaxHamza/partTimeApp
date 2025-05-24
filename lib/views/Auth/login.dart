@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:parttime/controller/login_cubit.dart';
+import 'package:parttime/controller/signup_cubit.dart';
 import 'package:parttime/views/Auth/signup.dart';
 import 'package:parttime/views/Auth/widgets/custom_button.dart';
 import 'package:parttime/views/Auth/widgets/custom_checkbox.dart';
@@ -40,15 +41,9 @@ class Login extends StatelessWidget {
             Form(
               child: Column(
                 children: [
-                  CustomTextfield(
-                    hint: "User name",
-                    controller: userName,
-                  ),
+                  CustomTextfield(hint: "User name", controller: userName),
                   SizedBox(height: 30.h),
-                  CustomTextfield(
-                    hint: "Password",
-                    controller: password,
-                  ),
+                  CustomTextfield(hint: "Password", controller: password),
                   CustomCheckbox(value: false),
 
                   // BlocConsumer بدل BlocBuilder
@@ -87,9 +82,10 @@ class Login extends StatelessWidget {
                       return CustomButton(
                         text: "Sign in",
                         onTap: () {
-                          context
-                              .read<LoginCubit>()
-                              .login(userName.text, password.text);
+                          context.read<LoginCubit>().login(
+                            userName.text,
+                            password.text,
+                          );
                         },
                       );
                     },
@@ -98,7 +94,12 @@ class Login extends StatelessWidget {
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.09),
                   GestureDetector(
                     onTap: () {
-                      Get.offAll(() => Signup());
+                      Get.offAll(
+                        () => BlocProvider(
+                          create: (context) => SignupCubit(),
+                          child: Signup(),
+                        ),
+                      );
                     },
                     child: Text(
                       "Don't have an account? Signup!",
