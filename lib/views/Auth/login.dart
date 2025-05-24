@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:parttime/controller/login_cubit.dart';
 import 'package:parttime/views/Auth/signup.dart';
 import 'package:parttime/views/Auth/widgets/custom_button.dart';
 import 'package:parttime/views/Auth/widgets/custom_checkbox.dart';
@@ -9,7 +11,10 @@ import 'package:parttime/views/Auth/widgets/custom_textfield.dart';
 import 'package:parttime/views/Home/home.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
+  Login({super.key});
+
+  final TextEditingController userName = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,21 +42,59 @@ class Login extends StatelessWidget {
                 children: [
                   CustomTextfield(
                     hint: "User name",
-                    controller: TextEditingController(),
+                    controller: userName,
                   ),
                   SizedBox(height: 30.h),
                   CustomTextfield(
                     hint: "Password",
-                    controller: TextEditingController(),
+                    controller: password,
                   ),
                   CustomCheckbox(value: false),
 
-                  CustomButton(
-                    text: "Sign in",
-                    onTap: () {
-                      Get.offAll(() => HomeView());
+                  // BlocConsumer بدل BlocBuilder
+                  BlocConsumer<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginFailure) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(
+                              state.message,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      } else if (state is LoginSuccess) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text(
+                              'You are signing in successfully!',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                        Get.offAll(() => HomeView());
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is LoginLoading) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      return CustomButton(
+                        text: "Sign in",
+                        onTap: () {
+                          context
+                              .read<LoginCubit>()
+                              .login(userName.text, password.text);
+                        },
+                      );
                     },
                   ),
+
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.09),
                   GestureDetector(
                     onTap: () {

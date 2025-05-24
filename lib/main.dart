@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:parttime/controller/login_cubit.dart';
 import 'package:parttime/home_binding.dart';
 import 'package:parttime/views/Auth/login.dart';
 
@@ -25,12 +27,15 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return GetMaterialApp(
+        return BlocProvider(
+  create: (context) => LoginCubit(),
+  child: GetMaterialApp(
           initialBinding: HomeBinding(),
           debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: 'Calibri'),
           home: Login(),
-        );
+        ),
+);
       },
     );
   }
