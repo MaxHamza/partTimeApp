@@ -5,16 +5,17 @@ import 'package:get/get.dart';
 import 'package:parttime/core/utils/app_fonts.dart';
 import 'package:parttime/main.dart';
 import 'package:parttime/views/Company/company_view.dart';
+import '../../model/jobs.dart';
 
 class Submit extends StatelessWidget {
-  const Submit({super.key});
-
+  const Submit({super.key,required this.job});
+  final Jobs job;
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        Get.offAll(() => CompanyView());
+        Get.offAll(() => CompanyView(jobs: job,));
       },
       child: Scaffold(
         appBar: AppBar(
@@ -27,11 +28,11 @@ class Submit extends StatelessWidget {
           title: ListTile(
             contentPadding: EdgeInsets.all(0),
             title: Text(
-              "Business Development Executive",
+              job.jobTitle,
               style: TextStyle(fontSize: 22.sp, color: Colors.white),
             ),
             subtitle: Text(
-              "TechFusion Solution",
+              job.companyName,
               style: TextStyle(fontSize: 18.sp, color: Colors.white),
             ),
           ),

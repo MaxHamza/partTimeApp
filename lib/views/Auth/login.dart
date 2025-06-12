@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:parttime/controller/login_cubit.dart';
-import 'package:parttime/controller/signup_cubit.dart';
+import 'package:parttime/controller/authintication/login_cubit.dart';
 import 'package:parttime/views/Auth/signup.dart';
 import 'package:parttime/views/Auth/widgets/custom_button.dart';
 import 'package:parttime/views/Auth/widgets/custom_checkbox.dart';
 import 'package:parttime/views/Auth/widgets/custom_login_header.dart';
 import 'package:parttime/views/Auth/widgets/custom_textfield.dart';
 import 'package:parttime/views/Home/home.dart';
+
+import '../../controller/authintication/signup_cubit.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});

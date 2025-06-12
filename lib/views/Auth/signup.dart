@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:parttime/controller/signup_cubit.dart';
-import 'package:parttime/controller/signup_cubit.dart';
 import 'package:parttime/views/Auth/login.dart';
 import 'package:parttime/views/Auth/widgets/custom_button.dart';
 import 'package:parttime/views/Auth/widgets/custom_textfield.dart';
 import 'package:parttime/views/Home/home.dart';
+
+import '../../controller/authintication/signup_cubit.dart';
 
 class Signup extends StatelessWidget {
   Signup({super.key});

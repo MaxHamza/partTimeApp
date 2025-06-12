@@ -14,9 +14,11 @@ import 'package:parttime/views/Company/widgets/company_name.dart';
 import 'package:parttime/views/Home/home.dart';
 import 'package:parttime/widgets/screen_background.dart';
 
-class CompanyView extends StatelessWidget {
-  const CompanyView({super.key});
+import '../../model/jobs.dart';
 
+class CompanyView extends StatelessWidget {
+  const CompanyView({super.key,required this.jobs});
+ final Jobs jobs;
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -41,7 +43,7 @@ class CompanyView extends StatelessWidget {
                     ApplyButton(
                       onTap: () {
                         debugPrint("Apply Button");
-                        Get.offAll(() => Submit());
+                        Get.offAll(() => Submit(job: jobs,));
                       },
                     ),
                   ],
@@ -65,34 +67,25 @@ class CompanyView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CompanyJobtitle(jobtitle: "Business Development Executive"),
-          CompanyName(comName: "TechFusion Solution"),
-          CompanyLocation(comlocation: "(Kingdom Saudia Arabia,KSA)"),
+          CompanyJobtitle(jobtitle: jobs.jobTitle),
+          CompanyName(comName: jobs.companyName),
+          CompanyLocation(comlocation:jobs.companyAddress),
           ComapnyOptions(
-            type: "Remote",
-            time: "Fulltime",
-            salary: "300-1200\$",
+            type: jobs.firstType,
+            time:jobs.secondType,
+            salary: jobs.salaryRange,
           ),
           ComapnyJobDescrib(
-            text:
-                "As a Business Development Executive, you play a pivotal role in our organization's growth and success. identify and capitalize on new business opportunities, foster partnerships, and enhance our market presence.",
+            text: jobs.jobDescription,
           ),
           CompanyJobKeys(
-            keys: [
-              "Market Research",
-              "Lead Generation",
-              "Client Relationship Management",
-              "Sales and Revenue Growth",
-              "Partnerships and Alliances",
-              "Product Knowledge",
-              "Sales Pipeline Management",
-            ],
+            keys: jobs.keyResponsibilities
           ),
           SizedBox(height: 24.h),
           Padding(
             padding: EdgeInsets.only(left: 23.w, bottom: 10.h),
             child: Text(
-              "Work Location: \nRemote Speak with the employer +9884848383",
+              "${jobs.companyAddress}: \n${jobs.firstType} Speak with the employer ${jobs.employerPhone}",
               style: TextStyle(color: Colors.white, fontSize: 15.sp),
             ),
           ),

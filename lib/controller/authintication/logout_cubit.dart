@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart'as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart'as http;
 part 'logout_state.dart';
+
 
 class LogoutCubit extends Cubit<LogoutState> {
   final SharedPreferences prefs;
@@ -38,3 +38,4 @@ class LogoutCubit extends Cubit<LogoutState> {
     }
   }
 }
+
