@@ -72,14 +72,9 @@ class HomeController extends GetxController {
     if (selectedUserList!.isEmpty) {
       selectedUserList = userList;
     }
-    filteredList =
-        userList.where((item) {
-          for (var element in selectedUserList!) {
-            return element.name!.contains(item.name!);
-          }
-
-          return true;
-        }).toList();
+    filteredList = userList.where((item) {
+      return selectedUserList!.any((element) => item.name!.contains(element.name!));
+    }).toList();
   }
 
   String selectedValueSingleDialog = "";

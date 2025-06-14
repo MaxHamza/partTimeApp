@@ -18,9 +18,10 @@ class HomeView extends StatelessWidget {
   HomeView({super.key});
 
   final homeController = Get.find<HomeController>();
-
+  TextEditingController searchCon=TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context) => HomeCubit(BlocProvider.of<LogoutCubit>(context).prefs)..fetchJobOpportunities(),
       child: Scaffold(
@@ -37,6 +38,7 @@ class HomeView extends StatelessWidget {
               return Center(child: Text(state.message),);
             }
             else if (state is HomeSuccess) {
+              List<Jobs>allJobs=state.filteredJobs;
               return Stack(
                 children: [
                   ScreenBackground(),
@@ -48,17 +50,11 @@ class HomeView extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 28.sp),
                     ),
                   ),
-
-                  GetBuilder<HomeController>(
-                    init: HomeController(),
-                    builder: (controller) {
-                      return CustomSearchBar(
-                        controller: controller.search,
-                        onTap: () {
-                          controller.openFilterDialog(context);
-                        },
-                      );
-                    },
+                  CustomSearchBar(
+                    controller: searchCon,
+                   onChanged: (val){
+                     context.read<HomeCubit>().searchJobs(name: val);
+                   },
                   ),
                   Positioned(
                     top: height! * 0.25,
@@ -67,18 +63,17 @@ class HomeView extends StatelessWidget {
                     child: SizedBox(
                       height: height! - (height! * 0.25),
                       child: ListView.builder(
-                        itemCount: state.opportunities.length,
+                        itemCount: allJobs.length,
                         itemBuilder: (context, index) {
-                          Jobs jobs = state.opportunities[index];
                           return CompanyCard(
                             onTap: () {
-                              Get.offAll(() => CompanyView(jobs: jobs,));
+                              Get.offAll(() => CompanyView(jobs: allJobs[index],));
                             },
-                            title: jobs.jobTitle,
-                            subtitle: jobs.companyName,
-                            time: jobs.firstType,
-                            place: jobs.secondType,
-                            price: jobs.salaryRange,
+                            title: allJobs[index].jobTitle,
+                            subtitle: allJobs[index].companyName,
+                            time: allJobs[index].firstType,
+                            place: allJobs[index].secondType,
+                            price: allJobs[index].salaryRange,
                           );
                         },
                       ),
