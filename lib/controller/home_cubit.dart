@@ -30,7 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
         final List<dynamic> data = responseData['data'];
         final opportunities = data.map((json) => Jobs.fromJson(json)).toList();
         _allJobs = opportunities;
-        emit(HomeSuccess(_allJobs,_allJobs));
+        emit(HomeSuccess(_allJobs, _allJobs));
       } else {
         emit(HomeFailure('Failed to load data: ${response.statusCode}'));
       }
@@ -48,21 +48,36 @@ class HomeCubit extends Cubit<HomeState> {
                 job.jobTitle.toLowerCase().contains(name.toLowerCase());
             final matchesCompanyName =
                 name == null ||
-                (job.companyName.toLowerCase().contains(
-                  name.toLowerCase(),
-                ));
-            final matchesFirstType= name==null||(job.firstType.toLowerCase().contains(name.toLowerCase()));
-            final matchesSecondType= name==null||(job.secondType.toLowerCase().contains(name.toLowerCase()));
-            return matchesName || matchesCompanyName||matchesFirstType||matchesSecondType;
+                (job.companyName.toLowerCase().contains(name.toLowerCase()));
+            final matchesFirstType =
+                name == null ||
+                (job.firstType.toLowerCase().contains(name.toLowerCase()));
+            final matchesSecondType =
+                name == null ||
+                (job.secondType.toLowerCase().contains(name.toLowerCase()));
+            return matchesName ||
+                matchesCompanyName ||
+                matchesFirstType ||
+                matchesSecondType;
           }).toList();
 
-      emit(HomeSuccess(_allJobs,filtered));
+      emit(HomeSuccess(_allJobs, filtered));
     }
   }
 
   void resetSearch() {
     if (state is HomeSuccess) {
       emit(HomeSuccess(_allJobs));
+    }
+  }
+
+  void filterByJobTitles(List<String> selectedJobs) {
+    if (state is HomeSuccess) {
+      final selectedTitles=selectedJobs.map((job)=>job).toSet();
+      final filtered=_allJobs.where((job){
+        return selectedTitles.contains(job.jobTitle);
+      }).toList();
+      emit(HomeSuccess(_allJobs,filtered));
     }
   }
 }
