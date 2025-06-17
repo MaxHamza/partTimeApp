@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart'as http;
-import 'package:parttime/model/jobs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'fetch_job_titles_state.dart';
 

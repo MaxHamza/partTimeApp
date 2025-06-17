@@ -4,10 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:parttime/controller/authintication/login_cubit.dart';
 import 'package:parttime/controller/authintication/logout_cubit.dart';
+import 'package:parttime/controller/user_inf_cubit.dart';
 import 'package:parttime/home_binding.dart';
 import 'package:parttime/views/Auth/login.dart';
 import 'package:parttime/views/Home/verify_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'controller/update_user_inf_cubit.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized(); // يجب أن يكون أول سطر
@@ -38,7 +41,9 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => LoginCubit(prefs)),
-            BlocProvider(create: (context)=>LogoutCubit(prefs))
+            BlocProvider(create: (context)=>LogoutCubit(prefs)),
+            BlocProvider(create: (context)=>UserInfCubit(prefs)..getUserInformation()),
+            BlocProvider(create: (context)=>UpdateUserInfCubit(prefs)),
           ],
           child: GetMaterialApp(
             initialBinding: HomeBinding(),
