@@ -29,7 +29,7 @@ class UpdateUserInfCubit extends Cubit<UpdateUserInfState> {
       if(userName!=null)request.fields['user_name']=userName;
      if(identifier!=null)request.fields['identifier']=identifier;
      if(country!=null)request.fields['country']=country;
-     if(jobTitle!=null)request.fields['jobTitle']=jobTitle;
+     if(jobTitle!=null)request.fields['job_title']=jobTitle;
      if(password!=null)request.fields['password']=password;
      if(cv!=null)request.files.add(await http.MultipartFile.fromPath('cv', cv.path));
      if (image != null) {
@@ -40,6 +40,8 @@ class UpdateUserInfCubit extends Cubit<UpdateUserInfState> {
      if(response.statusCode==200||response.statusCode==201){
         final respons=json.decode(response.body);
         print('success ${respons}');
+        if (!isClosed) emit(UpdateUserInfSuccess());
+
         emit(UpdateUserInfSuccess());
       }
     }

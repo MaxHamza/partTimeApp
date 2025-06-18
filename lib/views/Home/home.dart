@@ -71,8 +71,7 @@ class HomeView extends StatelessWidget {
                     top: height! * 0.15,
                     left: 20.w,
                     right: 20.w,
-                    child:
-                        BlocBuilder<FetchJobTitlesCubit, FetchJobTitlesState>(
+                    child: BlocBuilder<FetchJobTitlesCubit, FetchJobTitlesState>(
                           builder: (context, state1) {
                             if(state1 is FetchJobTitlesSuccess) {
                               return CustomSearchBar(

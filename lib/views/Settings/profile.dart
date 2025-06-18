@@ -10,6 +10,7 @@ import 'package:parttime/controller/user_inf_cubit.dart';
 import 'package:parttime/core/utils/app_fonts.dart';
 import 'package:parttime/views/Home/verify_login.dart';
 import 'package:parttime/views/Settings/information.dart';
+import 'package:parttime/views/Settings/widgets/my_cv.dart';
 import 'package:parttime/views/Settings/widgets/profile_option.dart';
 import 'package:parttime/widgets/screen_background.dart';
 
@@ -23,7 +24,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String? pickedImagePath;
+
   @override
   void initState() {
     BlocProvider.of<UserInfCubit>(context).getUserInformation();
@@ -216,10 +217,11 @@ class _ProfileState extends State<Profile> {
                     final path = await pickImageFile();
                     if (path != null) {
                       setState(() {
-                        pickedImagePath = path;
                       });
                       BlocProvider.of<UpdateUserInfCubit>(context).updateUserInf(
-                          image: File(path));
+                          image: File(path)).then((_){
+                        BlocProvider.of<UserInfCubit>(context).getUserInformation();
+                      });
 
                     }
                   },
@@ -277,12 +279,15 @@ class _ProfileState extends State<Profile> {
                     Icons.edit_document,
                     color: Colors.white,
                   ),
-                  title: "My Cv",
+                  title: "My CV",
+                  onTap: (){
+                    Get.offAll(() => MyCv());
+                  },
                 ),
                 SizedBox(height: 16.h),
                 ProfileOption(
                   onTap: () {
-                    Get.offAll(() => Information());
+                    Get.offAll(() => Information(image:state.user.image));
                   },
                   icon: const Icon(
                     Icons.person_outline,
