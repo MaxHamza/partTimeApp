@@ -23,6 +23,7 @@ class UpdateUserInfCubit extends Cubit<UpdateUserInfState> {
     try{
      final request= http.MultipartRequest('POST', url);
      request.headers['Authorization'] = 'Bearer ${prefs.getString('token')}';
+     request.headers['Accept'] = 'application/json';
      // request.headers['Accept']='application/json';
 // لا تضف Content-Type أبداً هنا
      print(prefs.getString('token'));
@@ -42,7 +43,6 @@ class UpdateUserInfCubit extends Cubit<UpdateUserInfState> {
         print('success ${respons}');
         if (!isClosed) emit(UpdateUserInfSuccess());
 
-        emit(UpdateUserInfSuccess());
       }
     }
     catch(e){

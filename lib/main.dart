@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:parttime/controller/apply_job_cubit.dart';
 import 'package:parttime/controller/authintication/login_cubit.dart';
 import 'package:parttime/controller/authintication/logout_cubit.dart';
 import 'package:parttime/controller/user_inf_cubit.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context)=>LogoutCubit(prefs)),
             BlocProvider(create: (context)=>UserInfCubit(prefs)..getUserInformation()),
             BlocProvider(create: (context)=>UpdateUserInfCubit(prefs)),
+            BlocProvider(create: (context)=>ApplyJobCubit(prefs))
           ],
           child: GetMaterialApp(
             initialBinding: HomeBinding(),

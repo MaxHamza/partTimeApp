@@ -15,6 +15,12 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchJobOpportunities() async {
     emit(HomeLoading());
     try {
+      final token = prefs.getString('token');
+
+      final headers = {
+        'Accept': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      };
       final response = await http.get(
         Uri.parse(
           'http://192.168.1.17:7882/part-time-app/public/api/jobOpportunities',

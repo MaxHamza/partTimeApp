@@ -14,15 +14,19 @@ Future<String?> pickImageFile() async {
     return null;
   }
 }
-Future<String?>pickCv()async{
-  final result= await FilePicker.platform.pickFiles(allowMultiple: true,
-  type: FileType.custom,
+
+Future<File?> pickCv()async{
+  final result= await FilePicker.platform.pickFiles(allowMultiple: false,
+    type: FileType.custom,
     allowedExtensions: ['pdf', 'doc', 'docx','pptx'],
   );
+  String name='';
+  final file=result?.files.first;
   if(result!=null&& result.files.single.path!=null){
-    String path= result.files.single.path!;
-    print('✅ You chose an CV: $path');
-    return path;
+    File cvFile = File(file!.path!); // هذا هو المسار المحلي الصحيح!
+    name= result.files.single.name!;
+    print('✅ You chose an CV: $cvFile');
+    return cvFile;
   }
   else{
     print('❌ You didn\'t choose any File');

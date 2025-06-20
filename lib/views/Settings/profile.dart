@@ -281,7 +281,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   title: "My CV",
                   onTap: (){
-                    Get.offAll(() => MyCv());
+                    Get.offAll(() => MyCv(cv:state.user.cv));
                   },
                 ),
                 SizedBox(height: 16.h),
@@ -352,7 +352,9 @@ class _ProfileState extends State<Profile> {
       );
     }
     else{
-    return Center(child: CircularProgressIndicator());
+    return Stack(children:[
+      ScreenBackground(),
+      Center(child: CircularProgressIndicator(color: Colors.deepPurple,))]);
     }
   },
 ),

@@ -168,7 +168,9 @@ class HomeView extends StatelessWidget {
                 ],
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Stack(children:[
+                ScreenBackground(),
+                Center(child: CircularProgressIndicator())]);
             }
           },
         ),
