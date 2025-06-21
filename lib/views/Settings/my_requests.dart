@@ -50,8 +50,7 @@ class MyRequests extends StatelessWidget {
             return Stack(
               children: [
               ScreenBackground(),
-                Center(child: Text('You don\'t have any Request Yet',style: TextStyle(color: Colors.white,
-                  fontSize: 18,
+                Center(child: Text('You don\'t have any Request Yet',style: TextStyle(color: Colors.white, fontSize: 18,
                 ),),),
               ],
             );
