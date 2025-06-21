@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:parttime/controller/authintication/login_cubit.dart';
-import 'package:parttime/controller/get_applications_cubit.dart';
+import 'package:parttime/controller/applications/get_applications_cubit.dart';
 import 'package:parttime/model/application_model.dart';
 import 'package:parttime/views/Settings/widgets/request_card.dart';
 import 'package:parttime/views/Settings/widgets/request_details.dart';

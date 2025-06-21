@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parttime/controller/authintication/login_cubit.dart';
-import 'package:parttime/controller/fetch_job_titles_cubit.dart';
-import 'package:parttime/controller/home_cubit.dart';
+import 'package:parttime/controller/home/fetch_job_titles_cubit.dart';
+import 'package:parttime/controller/home/home_cubit.dart';
 import 'package:parttime/views/Auth/login.dart';
 import 'package:parttime/views/Home/home.dart';
 class VerifyLogin extends StatelessWidget {

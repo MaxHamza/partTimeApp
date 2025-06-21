@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart'as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parttime/controller/apply_job_cubit.dart';
+import 'package:parttime/controller/applications/apply_job_cubit.dart';
 import 'package:parttime/model/application_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'get_applications_state.dart';
