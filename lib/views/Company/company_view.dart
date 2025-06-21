@@ -24,7 +24,7 @@ class CompanyView extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        Get.offAll(() => HomeView());
+        Get.to(() => HomeView());
       },
       child: Scaffold(
         body: Stack(

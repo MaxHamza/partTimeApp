@@ -40,7 +40,9 @@ class MyRequests extends StatelessWidget {
                       );
                     },
                     itemCount: state.applys!.length),
-                  ):Center(child: Text('You don\'t have any Request'),),
+                  ):Center(child: Text('You don\'t have any Request Yet',style: TextStyle(color: Colors.white,
+          fontSize: 18,
+          ),),),
               ],
             );
           }
@@ -48,7 +50,9 @@ class MyRequests extends StatelessWidget {
             return Stack(
               children: [
               ScreenBackground(),
-              Center(child: Text(state.message),)
+                Center(child: Text('You don\'t have any Request Yet',style: TextStyle(color: Colors.white,
+                  fontSize: 18,
+                ),),),
               ],
             );
           }

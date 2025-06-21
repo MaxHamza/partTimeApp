@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromARGB(106, 255, 255, 255),
           onPressed: () {
-            Get.offAll(() => Profile());
+            Get.to(() => Profile());
           },
           child: Icon(Icons.settings, color: Color(0xffffffff)),
         ),
@@ -151,7 +151,7 @@ class HomeView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return CompanyCard(
                             onTap: () {
-                              Get.offAll(
+                              Get.to(
                                 () => CompanyView(jobs: allJobs[index]),
                               );
                             },

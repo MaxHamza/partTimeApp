@@ -39,7 +39,7 @@ class _ProfileState extends State<Profile> {
     final height = MediaQuery.of(context).size.height;
 
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: Scaffold(
         body: BlocListener<LogoutCubit, LogoutState>(
           listener: (context, state) {
@@ -287,13 +287,13 @@ class _ProfileState extends State<Profile> {
                   ),
                   title: "My CV",
                   onTap: (){
-                    Get.offAll(() => MyCv(cv:state.user.cv));
+                    Get.to(() => MyCv(cv:state.user.cv));
                   },
                 ),
                 SizedBox(height: 16.h),
                 ProfileOption(
                   onTap: () {
-                    Get.offAll(() => Information(image:state.user.image));
+                    Get.to(() => Information(image:state.user.image));
                   },
                   icon: const Icon(
                     Icons.person_outline,
