@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:parttime/controller/authintication/login_cubit.dart';
 import 'package:parttime/controller/authintication/logout_cubit.dart';
+import 'package:parttime/controller/get_applications_cubit.dart';
 import 'package:parttime/controller/update_user_inf_cubit.dart';
 import 'package:parttime/controller/user_inf_cubit.dart';
 import 'package:parttime/core/utils/app_fonts.dart';
 import 'package:parttime/views/Home/verify_login.dart';
 import 'package:parttime/views/Settings/information.dart';
+import 'package:parttime/views/Settings/my_requests.dart';
 import 'package:parttime/views/Settings/widgets/my_cv.dart';
 import 'package:parttime/views/Settings/widgets/profile_option.dart';
 import 'package:parttime/widgets/screen_background.dart';
@@ -140,6 +143,9 @@ class _ProfileState extends State<Profile> {
                 ),
                 SizedBox(height: 16.h),
                 ProfileOption(
+                  onTap: (){
+                    Get.offAll(()=>MyRequests());
+                  },
                   icon: const Icon(
                     Icons.request_page_outlined,
                     color: Colors.white,
@@ -297,6 +303,12 @@ class _ProfileState extends State<Profile> {
                 ),
                 SizedBox(height: 16.h),
                 ProfileOption(
+                  onTap: (){
+                    Get.to(()=>   BlocProvider(
+  create: (context) => GetApplicationsCubit(BlocProvider.of<LoginCubit>(context).prefs)..fetchRequests(),
+  child: MyRequests(),
+),);
+                  },
                   icon: const Icon(
                     Icons.request_page_outlined,
                     color: Colors.white,

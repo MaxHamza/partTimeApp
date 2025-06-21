@@ -67,19 +67,19 @@ class CompanyView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CompanyJobtitle(jobtitle: jobs.jobTitle),
-          CompanyName(comName: jobs.companyName),
-          CompanyLocation(comlocation:jobs.companyAddress),
+          CompanyJobtitle(jobtitle: jobs.jobTitle!),
+          CompanyName(comName: jobs.companyName!),
+          CompanyLocation(comlocation:jobs.companyAddress!),
           ComapnyOptions(
-            type: jobs.firstType,
-            time:jobs.secondType,
-            salary: jobs.salaryRange,
+            type: jobs.firstType!,
+            time:jobs.secondType!,
+            salary: jobs.salaryRange!,
           ),
           ComapnyJobDescrib(
-            text: jobs.jobDescription,
+            text: jobs.jobDescription!,
           ),
           CompanyJobKeys(
-            keys: jobs.keyResponsibilities
+            keys: jobs.keyResponsibilities!
           ),
           SizedBox(height: 24.h),
           Padding(

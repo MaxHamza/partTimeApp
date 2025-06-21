@@ -51,16 +51,16 @@ class HomeCubit extends Cubit<HomeState> {
           _allJobs.where((job) {
             final matchesName =
                 name == null ||
-                job.jobTitle.toLowerCase().contains(name.toLowerCase());
+                job.jobTitle!.toLowerCase().contains(name.toLowerCase());
             final matchesCompanyName =
                 name == null ||
-                (job.companyName.toLowerCase().contains(name.toLowerCase()));
+                (job.companyName!.toLowerCase().contains(name.toLowerCase()));
             final matchesFirstType =
                 name == null ||
-                (job.firstType.toLowerCase().contains(name.toLowerCase()));
+                (job.firstType!.toLowerCase().contains(name.toLowerCase()));
             final matchesSecondType =
                 name == null ||
-                (job.secondType.toLowerCase().contains(name.toLowerCase()));
+                (job.secondType!.toLowerCase().contains(name.toLowerCase()));
             return matchesName ||
                 matchesCompanyName ||
                 matchesFirstType ||

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:parttime/controller/apply_job_cubit.dart';
 import 'package:parttime/controller/authintication/login_cubit.dart';
 import 'package:parttime/controller/authintication/logout_cubit.dart';
+import 'package:parttime/controller/get_applications_cubit.dart';
 import 'package:parttime/controller/user_inf_cubit.dart';
 import 'package:parttime/home_binding.dart';
 import 'package:parttime/views/Auth/login.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context)=>LogoutCubit(prefs)),
             BlocProvider(create: (context)=>UserInfCubit(prefs)..getUserInformation()),
             BlocProvider(create: (context)=>UpdateUserInfCubit(prefs)),
-            BlocProvider(create: (context)=>ApplyJobCubit(prefs))
+            BlocProvider(create: (context)=>ApplyJobCubit(prefs)),
           ],
           child: GetMaterialApp(
             initialBinding: HomeBinding(),

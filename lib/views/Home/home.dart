@@ -155,11 +155,11 @@ class HomeView extends StatelessWidget {
                                 () => CompanyView(jobs: allJobs[index]),
                               );
                             },
-                            title: allJobs[index].jobTitle,
-                            subtitle: allJobs[index].companyName,
-                            time: allJobs[index].firstType,
-                            place: allJobs[index].secondType,
-                            price: allJobs[index].salaryRange,
+                            title: allJobs[index].jobTitle!,
+                            subtitle: allJobs[index].companyName!,
+                            time: allJobs[index].firstType!,
+                            place: allJobs[index].secondType!,
+                            price: allJobs[index].salaryRange!,
                           );
                         },
                       ),

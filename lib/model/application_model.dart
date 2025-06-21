@@ -1,43 +1,46 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:parttime/model/jobs.dart';
 
 class ApplicationModel {
-  // 'id' => $this->id,
-  // 'user_id' => $this->user_id,
-  // 'job_opportunity' => $this->jobOpportunity,
-  // 'salary' => $this->salary,
-  // 'cv' => $this->cv ? url('storage/'.$this->cv) : null,
-  // 'status' => $this->status,
-  // 'application_time' => $this->created_at,
 
-  final int id;
-  final int userId;
-  final Jobs jobOppurtunity;
-  final double salary;
-  final String cv;
-  final String status;
-  final String appTime;
+
+  final int ?id;
+  final int ?userId;
+  final Jobs ?jobOppurtunity;
+  final double? salary;
+  final String? cv;
+  final bool? status;
+  final String ?appTime;
 
   ApplicationModel({
-    required this.id,
-    required this.cv,
-    required this.userId,
-    required this.appTime,
-    required this.jobOppurtunity,
-    required this.salary,
-    required this.status,
+     this.id,
+     this.cv,
+     this.userId,
+     this.appTime,
+    this.jobOppurtunity,
+     this.salary,
+     this.status,
   });
-
   factory ApplicationModel.json(Map<String, dynamic> json) {
     return ApplicationModel(
-      id: json['id'],
-      cv: json['cv'],
-      userId: json['user_id'],
+      id: json['id'] != null ? int.tryParse(json['id'].toString()) : null,
+      userId: json['user_id'] != null ? int.tryParse(json['user_id'].toString()) : null,
       appTime: json['application_time'],
-      jobOppurtunity: json['job_opportunity'],
-      salary: json['salary'],
-      status: json['status'],
+      cv: json['cv'],
+      salary: json['salary'] != null ? (json['salary'] as num).toDouble() : null,
+      status: json['status'] != null
+          ? (json['status'] is bool
+          ? json['status']
+          : json['status'].toString() == '1')
+          : null,
+      jobOppurtunity: json['job_opportunity'] != null
+          ? Jobs.fromJson(json['job_opportunity'] as Map<String, dynamic>)
+          : null,
     );
   }
+
+
+
 }

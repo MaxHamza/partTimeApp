@@ -1,40 +1,56 @@
-class Jobs{
-  final int id;
-  final String jobTitle;
-  final String jobDescription;
-  final String firstType;
-  final String secondType;
-  final String salaryRange;
-  final String companyName;
-  final String companyAddress;
-  final List<String> keyResponsibilities;
-  final String employerPhone;
+import 'dart:convert';
+class Jobs {
+  final int? id;
+  final String? jobTitle;
+  final String? jobDescription;
+  final String? firstType;
+  final String? secondType;
+  final String? salaryRange;
+  final String? companyName;
+  final String? companyAddress;
+  final List<String>? keyResponsibilities;
+  final String? employerPhone;
 
   Jobs({
-  required this.id,
-  required this.jobTitle,
-  required this.jobDescription,
-  required this.firstType,
-  required this.secondType,
-  required this.salaryRange,
-  required this.companyName,
-  required this.companyAddress,
-  required this.keyResponsibilities,
-  required this.employerPhone,
+    this.id,
+    this.jobTitle,
+    this.jobDescription,
+    this.firstType,
+    this.secondType,
+    this.salaryRange,
+    this.companyName,
+    this.companyAddress,
+    this.keyResponsibilities,
+    this.employerPhone,
   });
 
   factory Jobs.fromJson(Map<String, dynamic> json) {
-  return Jobs(
-  id: json['id'],
-  jobTitle: json['job_title'],
-  jobDescription: json['job_description'],
-  firstType: json['first_type'],
-  secondType: json['second_type'],
-  salaryRange: json['salary_range'],
-  companyName: json['company_name'],
-  companyAddress: json['company_address'],
-  keyResponsibilities: List<String>.from(json['key_responsibilities']),
-  employerPhone: json['employer_phone'],
-  );
+    List<String>? responsibilities;
+    final raw = json['key_responsibilities'];
+    if (raw != null) {
+      if (raw is List) {
+        responsibilities = List<String>.from(raw);
+      } else if (raw is String) {
+        try {
+          responsibilities = List<String>.from(jsonDecode(raw));
+        } catch (e) {
+          responsibilities = null;
+        }
+      }
+    } else {
+      responsibilities = null;
+    }
+    return Jobs(
+      id: json['id'] != null ? (json['id'] as num).toInt() : null,
+      jobTitle: json['job_title'] as String?,
+      jobDescription: json['job_description'] as String?,
+      firstType: json['first_type'] as String?,
+      secondType: json['second_type'] as String?,
+      salaryRange: json['salary_range'] as String?,
+      companyName: json['company_name'] as String?,
+      companyAddress: json['company_address'] as String?,
+      keyResponsibilities: responsibilities,
+      employerPhone: json['employer_phone'] as String?,
+    );
   }
-  }
+}

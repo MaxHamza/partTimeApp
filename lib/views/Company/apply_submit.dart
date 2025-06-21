@@ -55,11 +55,11 @@ class _SubmitState extends State<Submit> {
           title: ListTile(
             contentPadding: EdgeInsets.all(0),
             title: Text(
-              widget.job.jobTitle,
+              widget.job.jobTitle!,
               style: TextStyle(fontSize: 22.sp, color: Colors.white),
             ),
             subtitle: Text(
-              widget.job.companyName,
+              widget.job.companyName!,
               style: TextStyle(fontSize: 18.sp, color: Colors.white),
             ),
           ),
